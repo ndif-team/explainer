@@ -1,0 +1,17 @@
+{
+  "name": "explainer",
+  "description": "Build a step-by-step explainer page for a codebase, a system, a paper, a concept or your own results: one idea per click, each with the diagram, table, listing or animation that fits it",
+  "author": {
+    "name": "NDIF Team",
+    "email": "info@ndif.us"
+  },
+  "repository": "https://github.com/ndif-team/explainer",
+  "license": "MIT",
+  "keywords": [
+    "explainer",
+    "walkthrough",
+    "diagrams",
+    "teaching",
+    "html"
+  ]
+}

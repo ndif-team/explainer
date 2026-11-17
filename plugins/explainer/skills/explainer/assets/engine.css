@@ -1,0 +1,139 @@
+/* The house style of every explainer. A caption on the left, one visual on the right, controls along the bottom. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #16202b;
+  --muted: #5a6572;
+  --line: #d3d9e0;
+  --a: #2456c9;          /* first accent: the thing this step is about */
+  --a-soft: #e4ecfb;
+  --b: #b4480c;          /* second accent: the thing it is contrasted with */
+  --b-soft: #fbeadd;
+  --bad: #b3261e;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151b; --surface: #19202a; --ink: #e6eaef; --muted: #98a3b0; --line: #2f3945;
+    --a: #86aeff; --a-soft: #1b2a47; --b: #ffab73; --b-soft: #3b2a1c; --bad: #ff8a80;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11151b; --surface: #19202a; --ink: #e6eaef; --muted: #98a3b0; --line: #2f3945;
+  --a: #86aeff; --a-soft: #1b2a47; --b: #ffab73; --b-soft: #3b2a1c; --bad: #ff8a80;
+  color-scheme: dark;
+}
+
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+[hidden] { display: none !important; }
+
+.ex-app {
+  box-sizing: border-box; min-height: 100%; max-width: 84rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; grid-template-rows: auto 1fr auto;
+}
+.ex-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-block: 1rem 0.25rem;
+          font-size: 0.8125rem; color: var(--muted); }
+.ex-top strong { color: var(--ink); font-weight: 600; }
+.ex-frame { display: grid; grid-template-columns: minmax(15rem, 21rem) minmax(0, 1fr); gap: 2.25rem; align-items: center;
+            min-height: 0; padding-block: 1.25rem; }
+.ex-caption { display: flex; flex-direction: column; gap: 0.8rem; min-width: 0; }
+.ex-caption.in { animation: ex-caption-in 0.25s ease; }
+@keyframes ex-caption-in { from { opacity: 0.2; } to { opacity: 1; } }
+.ex-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.ex-caption h1 { font-family: var(--font-head); font-weight: 600; font-size: 1.85rem; line-height: 1.14; margin: 0; text-wrap: balance; }
+.ex-caption p { margin: 0; max-width: 34rem; }
+.ex-caption .ex-note { font-size: 0.875rem; color: var(--muted); }
+.ex-caption code { font-family: var(--font-mono); font-size: 0.875em; background: var(--a-soft); padding: 0.05em 0.3em; border-radius: 3px; }
+.ex-stage { min-width: 0; overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.ex-stage.clickable { cursor: pointer; }
+.ex-stage > svg { display: block; width: 100%; height: auto; max-height: min(70vh, 36rem); min-width: 640px;
+                  color: var(--ink); font-family: var(--font-body); }
+.ex-error { background: var(--bad); color: var(--bg); font-family: var(--font-mono); font-size: 0.8125rem; padding: 0.5rem 0.75rem; border-radius: 6px; }
+
+.ex-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem 1rem; padding-block: 0.75rem 1.25rem; border-top: 1px solid var(--line); }
+.ex-btn { font: inherit; font-size: 0.9375rem; padding: 0.45rem 1.1rem; border-radius: 6px; border: 1px solid var(--line);
+          background: var(--surface); color: var(--ink); cursor: pointer; }
+.ex-btn:hover:not(:disabled) { border-color: var(--muted); }
+.ex-btn.primary { background: var(--a); border-color: var(--a); color: var(--bg); font-weight: 500; }
+.ex-btn:disabled { opacity: 0.4; cursor: default; }
+.ex-btn:focus-visible, .ex-dot:focus-visible { outline: 2px solid var(--a); outline-offset: 2px; }
+.ex-dots { flex: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; min-width: 0; }
+.ex-dot { width: 18px; height: 18px; padding: 0; border: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.ex-dot::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--muted); box-sizing: border-box; }
+.ex-dot.first { margin-left: 10px; }
+.ex-dot.done::before { background: var(--muted); }
+.ex-dot.cur::before { background: var(--a); border-color: var(--a); width: 12px; height: 12px; }
+.ex-count { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---- drawing vocabulary, for SVG visuals ---- */
+.ex-stage text { fill: currentColor; font-size: 13px; }
+.ex-stage .small { font-size: 11.5px; }
+.ex-stage .num { font-family: var(--font-mono); font-size: 10.5px; }
+.ex-stage .big { font-family: var(--font-head); font-weight: 600; font-size: 34px; font-variant-numeric: tabular-nums; }
+.ex-stage .strong { font-weight: 600; }
+.ex-stage .muted { fill: var(--muted); }
+.ex-stage .on-ink { fill: var(--bg); }
+.ex-stage .t-a { fill: var(--a); }
+.ex-stage .t-b { fill: var(--b); }
+/* shapes */
+.ex-stage .box { fill: var(--surface); stroke: currentColor; stroke-width: 1.2; }
+.ex-stage .box-a { fill: var(--a-soft); stroke: var(--a); stroke-width: 1.2; }
+.ex-stage .box-b { fill: var(--b-soft); stroke: var(--b); stroke-width: 1.2; }
+.ex-stage .box-ink { fill: var(--ink); stroke: var(--ink); stroke-width: 1.2; }
+.ex-stage .box-quiet { fill: var(--surface); stroke: var(--muted); stroke-width: 1; }
+.ex-stage .group { fill: none; stroke: var(--line); stroke-width: 1.2; stroke-dasharray: 6 4; }
+.ex-stage .fill-ink { fill: currentColor; }
+.ex-stage .fill-a { fill: var(--a); }
+.ex-stage .fill-b { fill: var(--b); }
+.ex-stage .fill-quiet { fill: var(--line); }
+.ex-stage .track { fill: var(--bg); stroke: var(--line); stroke-width: 1; }
+.ex-stage .dot-a { fill: var(--a); stroke: var(--surface); stroke-width: 2; }
+/* lines; pair each with kit.arrow(kind) for an arrowhead in the same color */
+.ex-stage .wire { fill: none; stroke: currentColor; stroke-width: 1.2; }
+.ex-stage .wire-muted { fill: none; stroke: var(--muted); stroke-width: 1; }
+.ex-stage .wire-a { fill: none; stroke: var(--a); stroke-width: 1.6; }
+.ex-stage .wire-b { fill: none; stroke: var(--b); stroke-width: 1.6; }
+.ex-stage .arr { fill: currentColor; }
+.ex-stage .arr-muted { fill: var(--muted); }
+.ex-stage .arr-a { fill: var(--a); }
+.ex-stage .arr-b { fill: var(--b); }
+/* states an element moves through */
+.ex-stage .fade { transition: opacity 0.35s ease; }
+.ex-stage .off { opacity: 0; }
+.ex-stage .dim { opacity: 0.3; }
+.ex-stage .hot > rect, .ex-stage .hot > circle { fill: var(--a); stroke: var(--a); }
+.ex-stage .hot > text { fill: var(--bg); }
+.ex-stage .glow > rect, .ex-stage .glow > circle { fill: var(--a-soft); stroke: var(--a); stroke-width: 2; }
+
+/* ---- table and code visuals ---- */
+.ex-panel { box-sizing: border-box; padding: 1.25rem 1.5rem; max-height: min(70vh, 36rem); overflow: auto; }
+.ex-panel .ex-panel-title { font-size: 0.8125rem; color: var(--muted); margin: 0 0 0.75rem; }
+.ex-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+.ex-table th, .ex-table td { text-align: left; padding: 0.5rem 1rem 0.5rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ex-table th { font-size: 0.8125rem; font-weight: 500; color: var(--muted); }
+.ex-table .right { text-align: right; }
+.ex-table tr, .ex-code .ex-line { transition: opacity 0.3s ease, background-color 0.3s ease; }
+.ex-table tr.dim, .ex-code .ex-line.dim { opacity: 0.32; }
+.ex-table tr.lit td { background: var(--a-soft); }
+.ex-table tr.lit td:first-child { box-shadow: inset 3px 0 0 var(--a); }
+.ex-table code, .ex-table .mono { font-family: var(--font-mono); font-size: 0.875em; }
+.ex-code { margin: 0; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6; }
+.ex-code .ex-line { display: block; white-space: pre; padding: 0 0.6rem; min-height: 1.6em; }
+.ex-code .ex-line.lit { background: var(--a-soft); box-shadow: inset 3px 0 0 var(--a); }
+
+@media (max-width: 860px) {
+  .ex-frame { grid-template-columns: minmax(0, 1fr); align-items: start; gap: 1.25rem; }
+  .ex-caption h1 { font-size: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ex-caption.in { animation: none; }
+  .ex-stage .fade, .ex-table tr, .ex-code .ex-line { transition: none; }
+}
+
+/* #step-N-still and #step-N-check show finished frames only */
+.ex-static *, .ex-static *::before { transition: none !important; animation: none !important; }

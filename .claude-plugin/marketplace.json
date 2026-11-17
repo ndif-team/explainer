@@ -1,0 +1,17 @@
+{
+  "name": "ndif-explainer",
+  "owner": {
+    "name": "NDIF Team",
+    "email": "info@ndif.us"
+  },
+  "metadata": {
+    "description": "An agent skill that builds step-by-step explainer pages"
+  },
+  "plugins": [
+    {
+      "name": "explainer",
+      "source": "./plugins/explainer",
+      "description": "Build a step-by-step explainer page for a codebase, a system, a paper, a concept or your own results: one idea per click, each with the diagram, table, listing or animation that fits it"
+    }
+  ]
+}
