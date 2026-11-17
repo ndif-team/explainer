@@ -120,7 +120,7 @@ var tokens = E.svg(function (svg, kit) {
 | --- | --- |
 | Text | default 13px; `small`, `num` (mono), `big` (a headline number), `strong`, `muted`, `t-a`, `t-b`, `on-ink` (on a dark fill) |
 | Boxes | `box`, `box-quiet` (thin grey edge), `box-a`, `box-b`, `box-ink` (solid dark), `group` (dashed outline around parts), `track` (the empty part of a bar) |
-| Fills | `fill-ink`, `fill-a`, `fill-b`, `fill-quiet`; `dot-a` (a marker that travels) |
+| Fills | `fill-ink`, `fill-a`, `fill-b`, `fill-quiet`; `dot-a`, `dot-b` (a marker that travels) |
 | Lines | `wire`, `wire-muted`, `wire-a`, `wire-b`, with `'marker-end': kit.arrow()`, `kit.arrow('muted')`, `kit.arrow('a')`, `kit.arrow('b')` |
 | States | `fade` with `show()`; `dim` (30% opacity); on a `<g>`: `hot` (solid accent, the active one), `glow` (soft accent) |
 

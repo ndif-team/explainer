@@ -29,6 +29,16 @@ They add one idea per step and show a thing before using its name. Every claim
 comes from a source the agent read, and example values are labelled as examples.
 The page moves only when the reader clicks.
 
+## Example
+
+[`examples/nnsight-to-ndif`](examples/nnsight-to-ndif) was made with the skill: 22
+steps on how a few lines of [nnsight](https://nnsight.net/) reach a model on
+[NDIF](https://ndif.us/) and how the result comes back. Clone the repository and
+open `examples/nnsight-to-ndif/nnsight-to-ndif.html` in a browser. Its content is
+[`steps.js`](examples/nnsight-to-ndif/steps.js).
+
+![The last step of the example: a laptop sends a trace to NDIF, where a front door, a queue, a router and a line per model lead to one loaded copy of the model, and the saved value returns](examples/nnsight-to-ndif/preview.png)
+
 ## Install
 
 ### Claude Code

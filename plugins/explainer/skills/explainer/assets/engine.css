@@ -93,6 +93,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 .ex-stage .fill-quiet { fill: var(--line); }
 .ex-stage .track { fill: var(--bg); stroke: var(--line); stroke-width: 1; }
 .ex-stage .dot-a { fill: var(--a); stroke: var(--surface); stroke-width: 2; }
+.ex-stage .dot-b { fill: var(--b); stroke: var(--surface); stroke-width: 2; }
 /* lines; pair each with kit.arrow(kind) for an arrowhead in the same color */
 .ex-stage .wire { fill: none; stroke: currentColor; stroke-width: 1.2; }
 .ex-stage .wire-muted { fill: none; stroke: var(--muted); stroke-width: 1; }
